@@ -1,0 +1,11 @@
+.container {
+  position: relative;
+  background-color: aqua;
+}
+
+.content {
+  position: fixed;
+  z-index: 1;
+}
+
+/*# sourceMappingURL=Dropdown.module.css.map */

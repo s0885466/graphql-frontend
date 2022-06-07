@@ -1,29 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './App.module.scss';
-import { useQuery } from '@apollo/client';
-import allUsersQuery from './query.graphql';
-
-type User = {
-  name: string;
-  id: string;
-};
-
-type AllUsersData = {
-  allUsers: User[];
-};
+import Dropdown from './Dropdown';
 
 const App = () => {
-  const { loading, error, data } = useQuery<AllUsersData>(allUsersQuery);
+  const [scrollTop, setScrollTop] = useState(0);
 
-  if (loading) return <div>Loading...</div>;
-
-  if (error) return <div>Error :(</div>;
+  const scrollHandler = (e: React.UIEvent<HTMLElement>) => {
+    setScrollTop(e.currentTarget.scrollTop);
+  };
 
   return (
-    <div className={style.color}>
-      {data.allUsers.map((user) => (
-        <div key={user.id}>{user.name}</div>
-      ))}
+    <div className={style.container}>
+      <div className={style.form} onScroll={scrollHandler}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque error
+        eum eveniet ex hic incidunt, reprehenderit. Assumenda delectus id
+        impedit iste nesciunt, porro totam voluptatibus. Cumque, libero,
+        suscipit? Officia, quos!
+        <Dropdown scrollTop={scrollTop}>
+          <div className={style.dropdownContent}>
+            <ul>
+              <li>
+                <button
+                  onClick={() => {
+                    alert('fsdfsd');
+                  }}
+                >
+                  click me
+                </button>
+              </li>
+            </ul>
+          </div>
+        </Dropdown>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
+        cumque ducimus impedit laborum maiores modi provident quis tenetur
+        veniam veritatis! Aspernatur dicta dignissimos dolor eum exercitationem
+        ipsa rerum, veritatis voluptas. Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Asperiores cumque ducimus impedit laborum maiores modi
+        provident quis tenetur veniam veritatis! Aspernatur dicta dignissimos
+        dolor eum exercitationem ipsa rerum, veritatis voluptas.
+      </div>
     </div>
   );
 };
