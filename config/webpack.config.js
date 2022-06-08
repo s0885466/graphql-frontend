@@ -7,11 +7,13 @@ const commonConfig = merge([
   {
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, '../dist'),
     },
   },
   parts.resolve(),
-  parts.loaders(),
+  parts.loadScss(),
+  parts.loadTypescript(),
+  parts.loadQraphql(),
   parts.page(),
 ]);
 

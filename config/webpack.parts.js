@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require('path');
 
@@ -14,7 +15,7 @@ exports.devtool = (devtool) => ({
   devtool,
 });
 
-exports.loaders = () => ({
+exports.loadTypescript = () => ({
   module: {
     rules: [
       {
@@ -22,10 +23,13 @@ exports.loaders = () => ({
         use: 'babel-loader',
         exclude: /node_modules/,
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
+    ],
+  },
+});
+
+exports.loadQraphql = () => ({
+  module: {
+    rules: [
       {
         test: /\.(graphql|gql)$/,
         exclude: /node_modules/,
@@ -33,6 +37,27 @@ exports.loaders = () => ({
       },
     ],
   },
+});
+
+exports.loadScss = () => ({
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          { loader: MiniCssExtractPlugin.loader, options: {} },
+          'css-loader',
+          'sass-loader',
+        ],
+        sideEffects: true,
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
+  ],
 });
 
 exports.resolve = () => ({
