@@ -47,6 +47,12 @@ exports.loadScss = () => ({
         use: [
           { loader: MiniCssExtractPlugin.loader, options: {} },
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: { plugins: [require('autoprefixer')()] },
+            },
+          },
           'sass-loader',
         ],
         sideEffects: true,

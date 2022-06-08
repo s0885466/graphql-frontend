@@ -21,7 +21,7 @@ const App = () => {
 
   if (error)
     return (
-      <div>
+      <div className={style.container}>
         <div className={style.error}>Error :( eeedddddd</div>
         <button onClick={() => handleCount()}>count++</button>
         <div>count: {count}</div>
