@@ -6,10 +6,11 @@ const commonConfig = merge([
   { entry: './src/index.tsx' },
   {
     output: {
-      filename: 'bundle.js',
+      filename: '[name].js',
       path: path.resolve(__dirname, '../dist'),
     },
   },
+  parts.clean(),
   parts.resolve(),
   parts.loadScss(),
   parts.loadImages({ limit: 15000 }),
@@ -19,7 +20,21 @@ const commonConfig = merge([
   parts.page(),
 ]);
 
-const productionConfig = merge([]);
+const productionConfig = merge([
+  {
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'initial',
+          },
+        },
+      },
+    },
+  },
+]);
 
 const developmentConfig = merge([
   parts.devServer(),

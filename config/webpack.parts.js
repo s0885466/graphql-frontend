@@ -15,6 +15,12 @@ exports.generateSourceMaps = (devtool) => ({
   devtool,
 });
 
+exports.clean = () => ({
+  output: {
+    clean: true,
+  },
+});
+
 exports.loadTypescript = () => ({
   module: {
     rules: [
