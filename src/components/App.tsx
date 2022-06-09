@@ -3,6 +3,7 @@ import style from './App.module.scss';
 import { useQuery } from '@apollo/client';
 import allUsersQuery from './query.graphql';
 import { useMyHook } from './useMyHook';
+import photoSrc from '../assets/photo.jpeg';
 
 type User = {
   name: string;
@@ -16,16 +17,18 @@ type AllUsersData = {
 const App = () => {
   const { loading, error, data } = useQuery<AllUsersData>(allUsersQuery);
   const [count, handleCount] = useMyHook(0);
-
   if (loading) return <div>Loading...</div>;
 
   if (error)
     return (
-      <div className={style.container}>
-        <div className={style.error}>Error :( eeedddddd</div>
-        <button onClick={() => handleCount()}>count++</button>
-        <div>count: {count}</div>
-      </div>
+      <>
+        <img src={photoSrc} alt="same photo" width="200" height="100" />
+        <div className={style.container}>
+          <div className={style.error}>Error :( eeedddddd</div>
+          <button onClick={() => handleCount()}>count++</button>
+          <div>count: {count}</div>
+        </div>
+      </>
     );
 
   return (

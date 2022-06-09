@@ -66,6 +66,18 @@ exports.loadScss = () => ({
   ],
 });
 
+exports.loadImages = ({ limit } = {}) => ({
+  module: {
+    rules: [
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset',
+        parser: { dataUrlCondition: { maxSize: limit } },
+      },
+    ],
+  },
+});
+
 exports.resolve = () => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
