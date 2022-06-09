@@ -23,7 +23,7 @@ const productionConfig = merge([]);
 
 const developmentConfig = merge([
   parts.devServer(),
-  parts.devtool('inline-source-map'),
+  parts.generateSourceMaps('inline-source-map'),
 ]);
 
 const getConfig = (mode) => {

@@ -11,7 +11,7 @@ exports.devServer = () => ({
   },
 });
 
-exports.devtool = (devtool) => ({
+exports.generateSourceMaps = (devtool) => ({
   devtool,
 });
 
