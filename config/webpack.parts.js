@@ -78,6 +78,17 @@ exports.loadImages = ({ limit } = {}) => ({
   },
 });
 
+exports.loadFonts = () => ({
+  module: {
+    rules: [
+      {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        type: 'asset/resource',
+      },
+    ],
+  },
+});
+
 exports.resolve = () => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],

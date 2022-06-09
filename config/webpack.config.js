@@ -13,6 +13,7 @@ const commonConfig = merge([
   parts.resolve(),
   parts.loadScss(),
   parts.loadImages({ limit: 15000 }),
+  parts.loadFonts(),
   parts.loadTypescript(),
   parts.loadQraphql(),
   parts.page(),
