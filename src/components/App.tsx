@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 import style from './App.module.scss';
 import { useQuery } from '@apollo/client';
 import allUsersQuery from './query.graphql';
 import { useMyHook } from './useMyHook';
 import photoSrc from '../assets/photo.jpeg';
+
+const LazyComponent = lazy(
+  () => import(/* webpackChunkName: "LazyComponent" */ './Lazy')
+);
 
 type User = {
   name: string;
@@ -15,6 +19,8 @@ type AllUsersData = {
 };
 
 const App = () => {
+  const [showLazy, setShowLazy] = useState(false);
+
   useEffect(() => {
     async function hello() {
       return 'hello';
@@ -22,10 +28,6 @@ const App = () => {
 
     hello().then((res) => {
       console.log(res);
-    });
-
-    import('./Lazy').then((lazy) => {
-      console.log(lazy.default);
     });
   }, []);
   const { loading, error, data } = useQuery<AllUsersData>(allUsersQuery);
@@ -35,6 +37,12 @@ const App = () => {
   if (error)
     return (
       <div>
+        <button onClick={() => setShowLazy(true)}>show Lazy</button>
+        {showLazy && (
+          <React.Suspense fallback="...loading">
+            <LazyComponent />
+          </React.Suspense>
+        )}
         <img src={photoSrc} alt="same photo" width="200" height="100" />
         <div className={style.container}>
           <div className={style.error}>Error :( eeedddddd</div>
