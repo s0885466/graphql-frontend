@@ -4,11 +4,12 @@ const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const path = require('path');
+const { PROJECT_DIRECTORY, PORT } = require('./constants');
 
 exports.devServer = () => ({
   devServer: {
     hot: true,
-    port: 3000,
+    port: PORT,
     open: true,
   },
 });
@@ -109,7 +110,7 @@ exports.resolve = () => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      '@components': path.resolve(__dirname, '../src/components'),
+      '@components': path.resolve(PROJECT_DIRECTORY, 'src/components'),
     },
   },
 });
@@ -117,7 +118,7 @@ exports.resolve = () => ({
 exports.page = () => ({
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../src/index.html'),
+      template: path.join(PROJECT_DIRECTORY, 'src/index.html'),
     }),
   ],
 });

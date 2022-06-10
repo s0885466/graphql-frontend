@@ -1,13 +1,14 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const parts = require('./webpack.parts');
+const { PROJECT_DIRECTORY } = require('./constants');
 
 const commonConfig = merge([
-  { entry: './src/index.tsx' },
+  { entry: path.resolve(PROJECT_DIRECTORY, 'src/index.tsx') },
   {
     output: {
       filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, '../dist'),
+      path: path.resolve(PROJECT_DIRECTORY, 'dist'),
     },
   },
   parts.resolve(),
