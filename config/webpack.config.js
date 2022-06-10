@@ -6,7 +6,7 @@ const commonConfig = merge([
   { entry: './src/index.tsx' },
   {
     output: {
-      filename: '[name].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, '../dist'),
     },
   },
@@ -21,6 +21,13 @@ const commonConfig = merge([
 ]);
 
 const productionConfig = merge([
+  {
+    output: {
+      chunkFilename: '[name].[contenthash].js',
+      filename: '[name].[contenthash].js',
+      assetModuleFilename: '[name].[contenthash][ext][query]',
+    },
+  },
   {
     optimization: {
       splitChunks: {

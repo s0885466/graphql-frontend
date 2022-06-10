@@ -67,7 +67,7 @@ exports.loadScss = () => ({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].[contenthash].css',
     }),
   ],
 });
