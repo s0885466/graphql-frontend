@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const path = require('path');
 
@@ -95,9 +97,20 @@ exports.loadFonts = () => ({
   },
 });
 
+exports.bundleAnalyze = () => ({
+  plugins: [
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false,
+    }),
+  ],
+});
+
 exports.resolve = () => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@components': path.resolve(__dirname, '../src/components'),
+    },
   },
 });
 

@@ -10,8 +10,8 @@ const commonConfig = merge([
       path: path.resolve(__dirname, '../dist'),
     },
   },
-  parts.clean(),
   parts.resolve(),
+  parts.clean(),
   parts.loadScss(),
   parts.loadImages({ limit: 15000 }),
   parts.loadFonts(),
@@ -21,6 +21,7 @@ const commonConfig = merge([
 ]);
 
 const productionConfig = merge([
+  parts.bundleAnalyze(),
   {
     output: {
       chunkFilename: '[name].[contenthash].js',
@@ -30,15 +31,15 @@ const productionConfig = merge([
   },
   {
     optimization: {
-      splitChunks: {
-        cacheGroups: {
-          commons: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor',
-            chunks: 'initial',
-          },
-        },
-      },
+      splitChunks: { chunks: 'all' },
+      runtimeChunk: { name: 'runtime' },
+    },
+  },
+  {
+    performance: {
+      hints: 'warning', // "error" or false are valid too
+      maxEntrypointSize: 50000, // in bytes, default 250k
+      maxAssetSize: 100000, // in bytes
     },
   },
 ]);
@@ -49,7 +50,6 @@ const developmentConfig = merge([
 ]);
 
 const getConfig = (mode) => {
-  console.log('MODE', mode);
   switch (mode) {
     case 'production':
       return merge(commonConfig, productionConfig, { mode });
