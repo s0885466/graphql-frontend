@@ -4,7 +4,7 @@
     "es2021": true,
     "jest": true
   },
-  "ignorePatterns": ["config/*.js"],
+  //"ignorePatterns": ["config/*.js"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",

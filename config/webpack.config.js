@@ -1,7 +1,7 @@
-const path = require('path');
-const { merge } = require('webpack-merge');
-const parts = require('./webpack.parts');
-const { PROJECT_DIRECTORY } = require('./constants');
+import path from 'path';
+import { merge } from 'webpack-merge';
+import * as parts from './webpack.parts.js';
+import { PROJECT_DIRECTORY } from './constants.js';
 
 const commonConfig = merge([
   { entry: path.resolve(PROJECT_DIRECTORY, 'src/index.tsx') },
@@ -50,7 +50,7 @@ const developmentConfig = merge([
   parts.generateSourceMaps('inline-source-map'),
 ]);
 
-const getConfig = (mode) => {
+export const getConfig = (mode) => {
   switch (mode) {
     case 'production':
       return merge(commonConfig, productionConfig, { mode });
@@ -60,5 +60,3 @@ const getConfig = (mode) => {
       throw new Error(`Trying to use an unknown mode, ${mode}`);
   }
 };
-
-module.exports = getConfig;

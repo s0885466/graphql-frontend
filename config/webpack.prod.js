@@ -1,3 +1,3 @@
-const config = require('./webpack.config');
+import { getConfig } from './webpack.config.js';
 
-module.exports = config('production');
+export default getConfig('production');

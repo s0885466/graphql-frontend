@@ -1,12 +1,11 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin =
-  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import autoprefixer from 'autoprefixer';
+import path from 'path';
+import { PROJECT_DIRECTORY, PORT } from './constants.js';
 
-const path = require('path');
-const { PROJECT_DIRECTORY, PORT } = require('./constants');
-
-exports.devServer = () => ({
+export const devServer = () => ({
   devServer: {
     hot: true,
     port: PORT,
@@ -14,17 +13,17 @@ exports.devServer = () => ({
   },
 });
 
-exports.generateSourceMaps = (devtool) => ({
+export const generateSourceMaps = (devtool) => ({
   devtool,
 });
 
-exports.clean = () => ({
+export const clean = () => ({
   output: {
     clean: true,
   },
 });
 
-exports.loadTypescript = () => ({
+export const loadTypescript = () => ({
   module: {
     rules: [
       {
@@ -36,7 +35,7 @@ exports.loadTypescript = () => ({
   },
 });
 
-exports.loadQraphql = () => ({
+export const loadQraphql = () => ({
   module: {
     rules: [
       {
@@ -48,18 +47,25 @@ exports.loadQraphql = () => ({
   },
 });
 
-exports.loadScss = () => ({
+export const loadScss = () => ({
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/i,
         use: [
           { loader: MiniCssExtractPlugin.loader, options: {} },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
+          },
           {
             loader: 'postcss-loader',
             options: {
-              postcssOptions: { plugins: [require('autoprefixer')()] },
+              postcssOptions: { plugins: [autoprefixer()] },
             },
           },
           'sass-loader',
@@ -75,7 +81,7 @@ exports.loadScss = () => ({
   ],
 });
 
-exports.loadImages = ({ limit } = {}) => ({
+export const loadImages = ({ limit } = {}) => ({
   module: {
     rules: [
       {
@@ -87,7 +93,7 @@ exports.loadImages = ({ limit } = {}) => ({
   },
 });
 
-exports.loadFonts = () => ({
+export const loadFonts = () => ({
   module: {
     rules: [
       {
@@ -98,7 +104,7 @@ exports.loadFonts = () => ({
   },
 });
 
-exports.bundleAnalyze = () => ({
+export const bundleAnalyze = () => ({
   plugins: [
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
@@ -106,7 +112,7 @@ exports.bundleAnalyze = () => ({
   ],
 });
 
-exports.resolve = () => ({
+export const resolve = () => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
@@ -115,7 +121,7 @@ exports.resolve = () => ({
   },
 });
 
-exports.page = () => ({
+export const page = () => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(PROJECT_DIRECTORY, 'src/index.html'),

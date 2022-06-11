@@ -1,4 +1,4 @@
-const { path } = require('app-root-path');
+import path from 'app-root-path';
+export const PROJECT_DIRECTORY = path.path;
 
-exports.PROJECT_DIRECTORY = path;
-exports.PORT = 3000;
+export const PORT = 4200;
