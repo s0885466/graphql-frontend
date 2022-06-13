@@ -25,9 +25,8 @@ const productionConfig = merge([
   parts.bundleAnalyze(),
   {
     output: {
-      chunkFilename: '[name].[contenthash].js',
-      filename: '[name].[contenthash].js',
-      assetModuleFilename: '[name].[contenthash][ext][query]',
+      chunkFilename: 'js/[name].[contenthash].js',
+      filename: 'js/[name].[contenthash].js',
     },
   },
   {

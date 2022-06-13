@@ -76,7 +76,8 @@ export const loadScss = () => ({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: 'src/[name].[contenthash].css',
+      chunkFilename: 'src/[name].[contenthash].css',
     }),
   ],
 });
@@ -88,6 +89,9 @@ export const loadImages = ({ limit } = {}) => ({
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset',
         parser: { dataUrlCondition: { maxSize: limit } },
+        generator: {
+          filename: 'images/[contenthash][ext]',
+        },
       },
     ],
   },
@@ -99,6 +103,9 @@ export const loadFonts = () => ({
       {
         test: /\.(ttf|eot|woff|woff2)$/,
         type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[contenthash][ext]',
+        },
       },
     ],
   },
