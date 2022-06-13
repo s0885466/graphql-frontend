@@ -76,8 +76,8 @@ export const loadScss = () => ({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'src/[name].[contenthash].css',
-      chunkFilename: 'src/[name].[contenthash].css',
+      filename: 'css/[name].[contenthash].css',
+      chunkFilename: 'css/[name].[contenthash].css',
     }),
   ],
 });
@@ -115,6 +115,8 @@ export const bundleAnalyze = () => ({
   plugins: [
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
+      analyzerMode: 'disabled',
+      generateStatsFile: true,
     }),
   ],
 });
