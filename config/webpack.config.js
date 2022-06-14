@@ -31,7 +31,15 @@ const productionConfig = merge([
   },
   {
     optimization: {
-      splitChunks: { chunks: 'all' },
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        cacheGroups: {
+          defaultVendors: {
+            filename: 'js/vendor-[name].bundle.js',
+          },
+        },
+      },
       runtimeChunk: { name: 'runtime' },
     },
   },
