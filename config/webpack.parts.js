@@ -3,12 +3,12 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
-import { PROJECT_DIRECTORY, PORT } from './constants.js';
+import { PROJECT_DIRECTORY } from './constants.js';
 
-export const devServer = () => ({
+export const devServer = ({ port }) => ({
   devServer: {
     hot: true,
-    port: PORT,
+    port,
     open: true,
   },
 });
