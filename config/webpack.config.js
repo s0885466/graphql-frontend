@@ -15,8 +15,8 @@ const commonConfig = merge([
   },
   {
     plugins: [
-      new webpack.ProvidePlugin({
-        process: 'process/browser.js', // для доступа к process.env из приложения
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify(process.env),
       }),
     ],
   },
