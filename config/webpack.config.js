@@ -1,6 +1,7 @@
 import path from 'path';
 import getPort from 'get-port';
 import { merge } from 'webpack-merge';
+import webpack from 'webpack';
 import * as parts from './webpack.parts.js';
 import { PROJECT_DIRECTORY, PORT } from './constants.js';
 
@@ -11,6 +12,13 @@ const commonConfig = merge([
       filename: '[name].[contenthash].js',
       path: path.resolve(PROJECT_DIRECTORY, 'dist'),
     },
+  },
+  {
+    plugins: [
+      new webpack.ProvidePlugin({
+        process: 'process/browser.js', // для доступа к process.env из приложения
+      }),
+    ],
   },
   parts.resolve(),
   parts.clean(),
