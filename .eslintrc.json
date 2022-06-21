@@ -36,6 +36,7 @@
     "camelcase": "error",
     "spaced-comment": "error",
     "no-duplicate-imports": "error",
-    "no-unused-vars": "error"
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"]
   }
 }
