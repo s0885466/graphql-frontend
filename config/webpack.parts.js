@@ -7,6 +7,7 @@ import { PROJECT_DIRECTORY } from './constants.js';
 
 export const devServer = ({ port }) => ({
   devServer: {
+    historyApiFallback: true,
     hot: true,
     port,
     open: true,
